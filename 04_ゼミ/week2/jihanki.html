@@ -20,8 +20,20 @@
     </section>
     <section>
       <h3>商品を買う</h3>
-      <button id="buy-button-tea">お茶(100円)</button>
-      <button id="buy-button-beer">ビール(150円)</button>
+      <button
+        class="vending-machine__buy-buttons__button"
+        id="buy-button-tea"
+        disabled
+      >
+        お茶(100円)
+      </button>
+      <button
+        class="vending-machine__buy-buttons__button"
+        id="buy-button-beer"
+        disabled
+      >
+        ビール(150円)
+      </button>
     </section>
     <section>
       <h3>買った商品</h3>
@@ -40,6 +52,22 @@
       let saifu = 1000
       let jihankiMoney = 0
 
+      const disabledBeer = function () {
+        if (jihankiMoney >= 150) {
+          buyButtonBeer.removeAttribute("disabled")
+        } else {
+          buyButtonBeer.setAttribute("disabled", "")
+        }
+      }
+
+      const disabledTea = function () {
+        if (jihankiMoney >= 100) {
+          buyButtonTea.removeAttribute("disabled")
+        } else {
+          buyButtonTea.setAttribute("disabled", "")
+        }
+      }
+
       addButton.onclick = function () {
         if (saifu >= 100) {
           saifu -= 100
@@ -48,6 +76,8 @@
           console.log(jihankiMoney)
           displaySaifu.textContent = saifu
           jihanki.textContent = jihankiMoney
+          disabledBeer()
+          disabledTea()
         }
       }
 
@@ -59,6 +89,8 @@
           console.log(jihankiMoney)
           displaySaifu.textContent = saifu
           jihanki.textContent = jihankiMoney
+          disabledBeer()
+          disabledTea()
         }
       }
 
@@ -68,13 +100,18 @@
           jihankiMoney -= 100
           jihanki.textContent = jihankiMoney
           displayItems.textContent += "🍵"
+          disabledBeer()
+          disabledTea()
         }
       }
+
       buyButtonBeer.onclick = function () {
         if (jihankiMoney >= 150) {
           jihankiMoney -= 150
           jihanki.textContent = jihankiMoney
           displayItems.textContent += "🍺"
+          disabledBeer()
+          disabledTea()
         }
       }
     </script>
