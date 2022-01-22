@@ -10,7 +10,9 @@
     <h1>自販機</h1>
     <section>
       <h3>自販機にお金を入れる</h3>
+
       <button id="add-button-100">100円入れる</button>
+      <button id="back-button">お釣りレバー</button>
       <h4>↓財布↓</h4>
       <div id="display-saifu">1000</div>
       <h4>↓投入金額↓</h4>
@@ -31,6 +33,7 @@
       const addButton = document.getElementById("add-button-100")
       const displaySaifu = document.getElementById("display-saifu")
       const jihanki = document.getElementById("display-jihanki-money")
+      const backButton = document.getElementById("back-button")
       let saifu = 1000
       let jihankiMoney = 0
 
@@ -38,6 +41,17 @@
         if (saifu >= 100) {
           saifu -= 100
           jihankiMoney += 100
+          console.log(saifu)
+          console.log(jihankiMoney)
+          displaySaifu.textContent = saifu
+          jihanki.textContent = jihankiMoney
+        }
+      }
+
+      backButton.onclick = function () {
+        if (jihankiMoney >= 100) {
+          saifu += jihankiMoney
+          jihankiMoney = 0
           console.log(saifu)
           console.log(jihankiMoney)
           displaySaifu.textContent = saifu
