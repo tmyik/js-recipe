@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>配列を使ったメモアプリ</title>
+  </head>
+  <body>
+    <h2>配列を使ったメモアプリ</h2>
+    <input type="text" id="memo-input" />
+    <button id="add-button">保存</button>
+    <div id="memo-container"></div>
+
+    <script>
+      const memoInput = document.getElementById("memo-input")
+      const addButton = document.getElementById("add-button")
+      const memoContainer = document.getElementById("memo-container")
+
+      let memos = []
+      if (localStorage.memos) {
+        // ローカルストレージのmemosキーからJSONを読み込む。
+        const memosJson = localStorage.memos
+        // JSON.parseで配列にして、memosを更新する。
+        memos = JSON.parse(memosJson)
+        console.log(memos)
+
+        // ページ読み込み時に、配列の内容をブラウザに反映する。
+        for (let i = 0; i < memos.length; i++) {
+          const div = document.createElement("div")
+          div.textContent = memos[i]
+          memoContainer.append(div)
+        }
+      }
+      addButton.onclick = function () {
+        memos.push(memoInput.value) //入力欄の値を配列memosに入れている
+        localStorage.memos = JSON.stringify(memos)
+        memoContainer.textContent = "" //memoContainerの持つタグを消す → 配列の値を保持せず更新可能
+
+        for (let i = 0; i < memos.length; i++) {
+          //実際に配列の中身を表示させる処理
+
+          const text = memos[i] //textに配列の中身それぞれを入れる
+          const div = document.createElement("div") //divタグを作る
+          div.textContent = text // divタグの中身をtextにする
+          memoContainer.append(div)
+        }
+      }
+    </script>
+  </body>
+</html>
