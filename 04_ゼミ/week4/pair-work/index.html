@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vue ATM</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>入力画面</h2>
+      <input type="number" v-model="inputMoney" />
+      <div>入力額: {{inputMoney}}円</div>
+      <button v-on:click="nyuukin">入金</button>
+      <button v-on:click="syukkin" v-bind:disabled="isSyukkin">出金</button>
+
+      <h2>口座残高</h2>
+      <div v-for="record in records">{{record}}</div>
+      <div>残高: {{balance}}円</div>
+      <h2>取引記録</h2>
+    </div>
+    <script src="https://unpkg.com/vue@3.2.20"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

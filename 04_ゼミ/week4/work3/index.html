@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue自動販売機</title>
+  </head>
+  <body>
+    <h1>自動販売機</h1>
+
+    <!-- 1. 飲み物の名前と値段を表示する -->
+    <section id="app1">
+      <h3>飲み物の名前と値段を表示する</h3>
+
+      <div>
+        <div>{{drinkName}}</div>
+        <button>{{drinkPrice}}円</button>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            drinkName: "お茶",
+            drinkPrice: 120,
+          }
+        },
+      }).mount("#app1")
+    </script>
+
+    <!-- 2. 飲み物を買えるようにする (v-onについて) -->
+    <section id="app2">
+      <h3>飲み物を買えるようにする</h3>
+
+      <div>
+        <div>{{ drink.name }}</div>
+        <button v-on:click="buy">{{ drink.price }}円</button>
+        <div>{{num}}本買いました</div>
+      </div>
+    </section>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            drink: {
+              name: "お茶", // 名前
+              price: 120, // 値
+            },
+            num: 0,
+          }
+        },
+        methods: {
+          buy: function () {
+            this.num += 1
+          },
+        },
+      }).mount("#app2")
+    </script>
+
+    <!-- 3. 売り切れ状態を表示する１ (v-if v-elseについて) -->
+    <section id="app3">
+      <h3>売り切れ状態を表示する１</h3>
+
+      <div>
+        <div>{{ drink.name }} ({{drink.stock}})</div>
+        <button v-on:click="kau">{{ drink.price }}円</button>
+        <div>{{ kattaKazu }}本買いました</div>
+      </div>
+    </section>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            drink: {
+              name: "お茶", // 名前
+              price: 120, // 値段
+              stock: 3, //在庫数
+            },
+            kattaKazu: 0,
+          }
+        },
+        methods: {
+          kau: function () {
+            this.drink.stock -= 1
+            this.kattaKazu += 1
+          },
+        },
+      }).mount("#app3")
+    </script>
+  </body>
+</html>
